@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.oyid.mapper.TableMapper">
+
+    <select id="getAllTable" resultType="com.oyid.entity.Table" parameterType="string">
+        SELECT TABLE_NAME    AS tableName,
+               TABLE_COMMENT AS tableComment
+        FROM information_schema.TABLES
+        WHERE table_schema = #{database}
+    </select>
+
+    <select id="getAllTableInfo" resultType="com.oyid.entity.TableInfo" parameterType="string">
+        SELECT TABLE_NAME               AS      tableName,
+               COLUMN_NAME              AS      columnName,
+               COLUMN_TYPE              AS      columnType,
+               DATA_TYPE                AS      dataType,
+               CHARACTER_MAXIMUM_LENGTH AS      characterMaximumLength,
+               IS_NULLABLE              AS      isNullable,
+               COLUMN_DEFAULT           AS      columnDefault,
+               IF(COLUMN_KEY = 'PRI', 'Y', 'N') keyd,
+               COLUMN_COMMENT           AS      columnComment
+        FROM INFORMATION_SCHEMA.COLUMNS
+        WHERE table_schema = #{database}
+    </select>
+
+</mapper>
